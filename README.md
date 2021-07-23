@@ -1,6 +1,11 @@
 # Vore
 A state management library based on vue3 reactivity api with typescript support
 
+
+## Install
+
+`npm install vore` or `yarn add vore`
+
 ## Usage
 
 ### Step1. Defind a store class
