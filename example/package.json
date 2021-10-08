@@ -7,7 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "vore": "^1.0.0",
+    "vore": "^1.0.1",
     "vue": "^3.0.5"
   },
   "devDependencies": {

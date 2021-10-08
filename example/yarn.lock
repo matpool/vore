@@ -594,10 +594,10 @@ vite@^2.4.3:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vore@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/vore/-/vore-1.0.0.tgz#2225121b752b22c3f53bbb7661584d27885bfa78"
-  integrity sha512-Og6oAgn2jeVZMy7TSusRpEaeh3OWxspZOm5xBcm0Fixxa0/xUAd2vziyNsE7tilB/0+hwCkwy+/kJ5xsNQQq1w==
+vore@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/vore/-/vore-1.0.1.tgz#1ded4d16886d8314ef2bfba68ab03442a54e6619"
+  integrity sha512-Zj2+otNx8n0+tQ0+t9tZ9GXmzAAswQV990Tu3GNm2VFHuLTROjeU1ubv0/5tHEERYbSXGegibCbLm9MoMA/BKQ==
 
 vue-tsc@^0.0.24:
   version "0.0.24"
