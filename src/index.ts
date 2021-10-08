@@ -1,39 +1,42 @@
-import { reactive } from 'vue';
+import { reactive } from '@vue/reactivity';
 
-function getReactiveInstance<T extends { new (...args: any[]): any }>(cls: T) {
-  const instance = new cls();
-  const prototype = Object.getPrototypeOf(instance);
-  const props = Object.keys(instance);
-
-  // 将属性转换成reactive
-  let target = Object.create(null);
-  props.forEach((prop) => {
-    target[prop] = instance[prop];
-  });
-  target = reactive(target);
-
-  // 设置prototype, 继承方法
-  Object.setPrototypeOf(target, prototype);
-
-  return target;
+class Model<MC> {
+  model: MC;
+  constructor(model: MC) {
+    this.model = makeAutoReactive(model);
+  }
 }
 
-export function createStore<T extends Record<string, any>>(stores: T) {
-  const reactiveStores: Record<
-    keyof T,
-    InstanceType<T[keyof T]>
-  > = Object.create(null);
-  Object.keys(stores).forEach((k: keyof T) => {
-    reactiveStores[k] = getReactiveInstance(stores[k]);
-  });
+type Models<MS> = {
+  [K in keyof MS]: Model<MS[K]>;
+};
 
-  function useStore(): Record<keyof T, InstanceType<T[keyof T]>>;
-  function useStore(name: keyof T): InstanceType<T[typeof name]>;
-  function useStore(name?: keyof T) {
-    return name ? reactiveStores[name] : reactiveStores;
+export class Store<MS> {
+  stores: Models<MS> = {} as any;
+
+  constructor(models: MS) {
+    type K = keyof MS;
+    (Object.keys(models) as any).forEach((key: K) => {
+      this.stores[key] = new Model<MS[K]>(models[key]);
+    });
   }
 
-  return {
-    useStore,
-  };
+  get<K extends keyof MS>(key: K & string): MS[K] {
+    return this.stores[key].model;
+  }
+}
+
+export function makeAutoReactive(obj: any) {
+  const prototype = Object.getPrototypeOf(obj);
+  const props = Object.getOwnPropertyNames(obj);
+
+  const rawObj = props.reduce<Record<string, any>>((oo, key) => {
+    oo[key] = obj[key];
+    return oo;
+  }, {});
+
+  const reactiveObj = reactive(rawObj) as any;
+  Object.setPrototypeOf(reactiveObj, prototype);
+
+  return reactiveObj;
 }

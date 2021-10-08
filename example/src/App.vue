@@ -84,7 +84,7 @@ import { computed, onMounted, ref, watchEffect } from 'vue';
 import { store } from './store';
 import { Todo } from './store/Todo';
 
-const todos = store.useStore('todoList');
+const todos = store.get('todoList');
 const newTodo = ref('');
 const visibility = ref<'all' | 'active' | 'completed'>('all');
 const allDone = ref(false);

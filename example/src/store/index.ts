@@ -1,4 +1,6 @@
-import { createStore } from 'vore';
+import { Store } from 'vore';
 import { TodoList } from './TodoList';
 
-export const store = createStore({ todoList: TodoList });
+export const store = new Store({
+  todoList: new TodoList(),
+});

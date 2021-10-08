@@ -5,7 +5,7 @@ export class Todo {
   title = '';
   complete = false;
 
-  constructor(props: Partial<Todo>) {
+  constructor(props?: Partial<Todo>) {
     this.id = mockStartId++;
     Object.assign(this, props);
   }

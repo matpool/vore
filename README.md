@@ -30,15 +30,15 @@ class User {
 
 ### Setp2. Create store
 ```typescript
-import { createStore } from 'vore'
+import { Store } from 'vore'
 import { User } from 'user-path'
 
-export const store = createStore({
-  user: User
+export const store = new Store({
+  user: new User()
 })
 ```
 
-### Step3. use store to access store instance
+### Step3. use store.get to access store instance
 ```vue
 <template>
   <div>{{ userStore.fullname }}</div>
@@ -48,7 +48,7 @@ export const store = createStore({
   import { onMounted } from 'vue'
   import { store } from 'store-path'
   
-  const userStore = store.useStore('user')
+  const userStore = store.get('user')
 
   onMounted(() => {
     userStore.getUserInfo()
